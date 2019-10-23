@@ -1,0 +1,10 @@
+Progress:,Complete,█,-,80,Completed!!!!!!!!!!
+Regress:,Dump,-,█,80,ГЫЫЫЫЫЫЫЫЫЫЫЫЫЫ!!!!
+SMALL:,EZ,>, ,20,EZ KATKA
+BIG?:,EEEE,?, ,100,HARD
+SOME RANDOM TEXT:,STILL RANDOM TEXT,l,i,26,Lorem ipsum dolor sit amet.
+ANY PERCENT?,A?,%,-,80,percentage
+Downloading viruses...,WHY????,🦠,,100,YOU ARE NOW IN DANGER!!! BE CAREFUL!!!
+Random memes installation,MEMES))),),_,50,NOW YOU CAN WATCH AALLLL MEMES IN THE WORLD
+!!!ERROR PROGRESS!!!,!!!! ERROR !!!,!,.,75,ERROR OCCURRED
+SOME Progress downloaded virus,it's time to delete this,x,🦠,20,NOT YOU ARE SAFE
