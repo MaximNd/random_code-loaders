@@ -6,6 +6,7 @@ from ShitPrintable import ShitPrintable
 from ErrorCausable import ErrorCausable
 from ErrorPrintable import ErrorPrintable
 from ErrorPrinter import ErrorPrinter
+from pygments.formatter import Formatter
 from pygments.lexers import python as py_l
 from pygments.lexers import c_cpp as cpp_l
 from pygments.lexers import javascript as js_l
@@ -62,12 +63,18 @@ files_types = [
   langs['haskell']
 ]
 
-class RandomCodePrinter(ShitPrintable, ErrorCausable):
-  
+class AbstractRandomCodePrinter(ShitPrintable, ErrorCausable):
   def __init__(self, error_printable: ErrorPrintable):
     self.sleep_acc = 0
     self.error_chance_num = 400
     self.error_printable = error_printable
+    self.formatter = None
+
+  def init_formatter(self, **kwargs): raise NotImplementedError
+
+  def get_color(self, token): raise NotImplementedError
+
+  def get_colorized_symbol(self, symbol, color): raise NotImplementedError
 
   def print_some_random_shit(self):
     file_number = randrange(20)
@@ -77,14 +84,15 @@ class RandomCodePrinter(ShitPrintable, ErrorCausable):
       self.print_code(file, lexer)
 
   def print_code(self, file, lexer: Lexer):
+    if (not self.formatter):
+      self.init_formatter()
     code = file.read()
-    terminal_formatter = tf.TerminalFormatter()
     colors_indices = []
     color_idx = 0
     char_idx = 0
     for index, token, text in lexer.get_tokens_unprocessed(code):
-      colors_indices.append({ 'index': index, 'text': text, 'color': terminal_formatter._get_color(token) })
-
+      colors_indices.append({ 'index': index, 'text': text, 'color': self.get_color(token) })
+    
     file.seek(0)
     self.sleep_acc = self.get_sleep_acc()
     for line in file:
@@ -110,7 +118,7 @@ class RandomCodePrinter(ShitPrintable, ErrorCausable):
         if char_idx >= next_color_data['index'] - 1:
           color_idx += 1
           
-        print_l_colorized(ch, color_data['color'])
+        print_l(self.get_colorized_symbol(ch, color_data['color']))
         char_idx += 1
   
   def get_sleep_acc(self):
